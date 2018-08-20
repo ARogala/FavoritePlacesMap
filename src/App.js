@@ -1,17 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
+import Map from './Map';
 
-class App extends Component {
+class App extends React.Component {
+
+  onMapLoad(map) {
+    new window.google.maps.Marker({
+      position: { lat: 40.948910, lng: -74.155290 },
+      map: map,
+      title: 'Hello Hawthorn NJ!'});
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Map
+        id="map"
+        options={{
+          center: {lat: 40.948910, lng: -74.155290},
+          zoom: 12
+        }}
+        onMapLoad={this.onMapLoad}
+      />
     );
   }
 }
