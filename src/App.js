@@ -7,14 +7,7 @@ import LocationsList from './LocationsList';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {locations: [
-      {title: 'Hawthorne Theaters', location: {lat: 40.948469, lng: -74.155604}, id: 0},
-      {title: 'Kirker\'s Inn', location: {lat: 40.949215, lng: -74.153104}, id: 1},
-      {title: 'Justin\'s Ristorante', location: {lat: 40.946083, lng: -74.155604}, id: 2},
-      {title: 'Bogie\'s Hoagies & Deli', location: {lat: 40.952615, lng: -74.155122}, id: 3},
-      {title: 'Diamond Liquors & Tavern', location: {lat: 40.949171, lng: -74.154434}, id: 4},
-      {title: 'Goffle Brook Park', location: {lat: 40.94779, lng: -74.161443}, id: 5}
-    ]};
+    this.state = {};
   }
 
   onMapLoad(map, locations) {
@@ -44,12 +37,12 @@ class App extends React.Component {
             zoom: 15
           }}
           onMapLoad = {this.onMapLoad}
-          locations = {this.state.locations}
+          locations = {this.props.locations}
         />
         <div className = "searchBox">
           <SearchBar />
           <LocationsList
-            locations = {this.state.locations}
+            locations = {this.props.locations}
           />
         </div>
       </div>
