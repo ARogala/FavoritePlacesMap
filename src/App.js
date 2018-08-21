@@ -13,6 +13,12 @@ class App extends React.Component {
     };
   }
 
+  handleFilterTextChange(filterText) {
+    this.setState({
+      filterText: filterText
+    });
+  }
+
   onMapLoad(map, locations) {
     for(let i = 0; i < locations.length; i++) {
       //get the lat and long for each location in the array
@@ -45,6 +51,9 @@ class App extends React.Component {
         <div className = "searchBox">
           <SearchBar
             filterText = {this.state.filterText}
+            onFilterTextChange = {(filterText) => {
+              this.handleFilterTextChange(filterText);
+            }}
           />
           <LocationsList
             locations = {this.props.locations}
