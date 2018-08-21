@@ -12,7 +12,7 @@ class SearchBar extends React.Component {
 	render() {
 		return (
 			<div className="searchBarContainer">
-				<label for="filterLocations" className="locationsLabel">Filter Locations:</label>
+				<label htmlFor="filterLocations" className="locationsLabel">Filter Locations:</label>
             	<input type="text" id="filterLocations"/>
 			</div>
 		);

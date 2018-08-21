@@ -20,7 +20,7 @@ class Map extends React.Component {
 		map = new window.google.maps.Map(
 			document.getElementById(this.props.id), this.props.options);
 		//add the marker
-		this.props.onMapLoad(map);
+		this.props.onMapLoad(map, this.props.locations);
 
 	}
 	/*
