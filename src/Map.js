@@ -7,6 +7,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Map extends React.Component {
 	constructor(props) {
@@ -57,6 +58,13 @@ class Map extends React.Component {
 			<div id={this.props.id} />
 		);
 	}
+}
+
+Map.propTypes = {
+	id: PropTypes.string.isRequired,
+	options: PropTypes.object.isRequired,
+	onMapLoad: PropTypes.func.isRequired,
+	locations: PropTypes.array.isRequired
 }
 
 export default Map;

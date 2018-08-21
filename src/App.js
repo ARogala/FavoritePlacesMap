@@ -3,11 +3,14 @@ import './App.css';
 import Map from './Map';
 import SearchBar from './SearchBar';
 import LocationsList from './LocationsList';
+import PropTypes from 'prop-types';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      filterText: ''
+    };
   }
 
   onMapLoad(map, locations) {
@@ -40,7 +43,9 @@ class App extends React.Component {
           locations = {this.props.locations}
         />
         <div className = "searchBox">
-          <SearchBar />
+          <SearchBar
+            filterText = {this.state.filterText}
+          />
           <LocationsList
             locations = {this.props.locations}
           />
@@ -48,6 +53,10 @@ class App extends React.Component {
       </div>
     );
   }
+}
+
+App.propTypes = {
+  locations: PropTypes.array.isRequired
 }
 
 export default App;

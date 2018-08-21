@@ -7,6 +7,7 @@
 
 import './LocationsList.css'
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class LocationsList extends React.Component {
 	render() {
@@ -23,6 +24,10 @@ class LocationsList extends React.Component {
 			</ul>
 		);
 	}
+}
+
+LocationsList.propTypes = {
+  locations: PropTypes.array.isRequired
 }
 
 export default LocationsList;
