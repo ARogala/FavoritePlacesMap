@@ -15,7 +15,7 @@ class App extends React.Component {
 
   handleFilterTextChange(filterText) {
     this.setState({
-      filterText: filterText
+      filterText: filterText.trim()
     });
   }
 
@@ -57,6 +57,7 @@ class App extends React.Component {
           />
           <LocationsList
             locations = {this.props.locations}
+            filterText = {this.state.filterText}
           />
         </div>
       </div>
