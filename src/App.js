@@ -19,6 +19,10 @@ class App extends React.Component {
     });
   }
 
+  handleListBtnClick() {
+    console.log('btn was clicked');
+  }
+
   onMapLoad(map, locations) {
     for(let i = 0; i < locations.length; i++) {
       //get the lat and long for each location in the array
@@ -58,6 +62,9 @@ class App extends React.Component {
           <LocationsList
             locations = {this.props.locations}
             filterText = {this.state.filterText}
+            onListBtnClick = {() => {
+              this.handleListBtnClick();
+            }}
           />
         </div>
       </div>

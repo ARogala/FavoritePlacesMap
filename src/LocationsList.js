@@ -14,6 +14,7 @@ import sortBy from 'sort-by';
 class LocationsList extends React.Component {
 	render() {
 		const locations = this.props.locations;
+		const clickBtnFunc = this.props.onListBtnClick;
 		let filterText = this.props.filterText;
 
 		/* Filter logic
@@ -34,7 +35,8 @@ class LocationsList extends React.Component {
 		//build the locationList elements
 		const locationsList = filteredLocations.map((location) => {
 			return (
-				<li key={location.id}>{location.title + ' - ' + location.category}</li>
+				<li key={location.id} onClick={clickBtnFunc} onKeyPress={clickBtnFunc}
+				role="button" tabIndex="0">{location.title + ' - ' + location.category}</li>
 			);
 		});
 
@@ -48,7 +50,8 @@ class LocationsList extends React.Component {
 
 LocationsList.propTypes = {
   locations: PropTypes.array.isRequired,
-  filterText: PropTypes.string.isRequired
+  filterText: PropTypes.string.isRequired,
+  onListBtnClick: PropTypes.func.isRequired
 }
 
 export default LocationsList;
