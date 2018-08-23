@@ -20,8 +20,8 @@ class Map extends React.Component {
 		let map;
 		map = new window.google.maps.Map(
 			document.getElementById(this.props.id), this.props.options);
-		//add the marker
-		this.props.onMapLoad(map, this.props.locations);
+		//add the markers
+		this.props.onMapLoad(map);
 
 	}
 	/*
@@ -63,8 +63,7 @@ class Map extends React.Component {
 Map.propTypes = {
 	id: PropTypes.string.isRequired,
 	options: PropTypes.object.isRequired,
-	onMapLoad: PropTypes.func.isRequired,
-	locations: PropTypes.array.isRequired
+	onMapLoad: PropTypes.func.isRequired
 }
 
 export default Map;

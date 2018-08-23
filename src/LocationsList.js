@@ -35,7 +35,7 @@ class LocationsList extends React.Component {
 		//build the locationList elements
 		const locationsList = filteredLocations.map((location) => {
 			return (
-				<li key={location.id} onClick={clickBtnFunc} onKeyPress={clickBtnFunc}
+				<li key={location.id} onClick={(e) => {clickBtnFunc(location.id, e.type)}} onKeyPress={(e) => {clickBtnFunc(location.id, e.key)}}
 				role="button" tabIndex="0">{location.title + ' - ' + location.category}</li>
 			);
 		});
