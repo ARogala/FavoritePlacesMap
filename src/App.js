@@ -1,8 +1,10 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import './App.css';
 import Map from './Map';
 import SearchBar from './SearchBar';
 import LocationsList from './LocationsList';
+import InfoWindow from './InfoWindow';
 import PropTypes from 'prop-types';
 
 //need these global variables in order to pass
@@ -51,7 +53,17 @@ class App extends React.Component {
     // Check to make sure the infowindow is not already opened on this marker.
     if (infowindow.marker !== marker) {
       infowindow.marker = marker;
-      infowindow.setContent('<div>' + marker.title + '</div>');
+      infowindow.setContent('<div id="infowindow"></div>');
+
+      infowindow.addListener('domready', () => {
+        ReactDOM.render(
+          <InfoWindow
+            marker = {marker}
+          />,
+          document.getElementById('infowindow')
+        );
+      });
+
       infowindow.open(map, marker);
       // Make sure the marker property is cleared if the infowindow is closed.
       infowindow.addListener('closeclick', function() {
