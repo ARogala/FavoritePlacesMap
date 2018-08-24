@@ -11,7 +11,8 @@ const LOCATIONS = [
 	{title: 'Bogie\'s Hoagies & Deli', category: 'Restaurant', location: {lat: 40.952615, lng: -74.155122}, id: 3},
 	{title: 'Diamond Liquors & Tavern', category: 'Liquor Store', location: {lat: 40.949171, lng: -74.154434}, id: 4},
 	{title: 'Goffle Brook Park', category: 'Park', location: {lat: 40.94779, lng: -74.161443}, id: 5},
-	{title: 'Harriman State Park', category: 'Park', location: {lat: 41.174056, lng: -74.16854}, id: 6}
+	{title: 'Harriman State Park', category: 'Park', location: {lat: 41.2354960, lng: -74.1449013}, id: 6},
+	{title: 'Wawayanda State Park', category: 'Park', location: {lat: 41.190122, lng: -74.429556}, id: 7}
 ];
 
 ReactDOM.render(<App locations={LOCATIONS} />, document.getElementById('root'));

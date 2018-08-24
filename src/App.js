@@ -7,18 +7,27 @@ import LocationsList from './LocationsList';
 import InfoWindow from './InfoWindow';
 import PropTypes from 'prop-types';
 
-//need these global variables in order to pass
-//from handleListBtnClick to addInfoWindow()
+/*
+  need these global variables in order to pass
+  from handleListBtnClick to getFoursquareData()
+  Did not add these var to state because MAP and INFOWINDOW
+  don't change and MARKERS can be computed
+  based on location props
+*/
 let MARKERS = [];
 let MAP;
 let INFOWINDOW;
-
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filterText: ''
+      filterText: '',
+      foursquareURL: '',
+      foursquareAddress: [],
+      resultsReturned: null,
+      fetchError: null,
+      error: ''
     };
   }
 
@@ -30,9 +39,12 @@ class App extends React.Component {
   /*
     on button click or enter key press
     check for the right marker by comparing the id's
-    of the global MARKERS and the locationID from the LocationList
+    of the global MARKERS and the locationID from the LocationList.
     store the right marker in the marker variable and call
-    add infoInfoWindow.
+    getFoursquareData(). Foursquare data must be fetched and resolved before
+    the call the addInfoWindow(). Parameters map and infowindow are not used in
+    getFoursquareData() but are passed down to addInfoWindow().
+
     Not sure how to do this without global variables
     the needed variables are set up in Map.js and onMapLoad() function
     so a assigning a copy to a global var is the only way i know for now.
@@ -45,8 +57,55 @@ class App extends React.Component {
           marker = MARKERS[i];
         }
       }
-      this.addInfoWindow(marker, MAP, INFOWINDOW);
+      this.getFoursquareData(marker, MAP, INFOWINDOW);
     }
+  }
+
+  getFoursquareData(marker, map, infowindow) {
+
+    let markerLat = marker.position.lat();
+    let markerLng = marker.position.lng();
+    let markerTitle = marker.title;
+    let clientID = 'D2QY4QR2LLI5AIE1PMHR43G1FQSC25H035FBU420P3GQQXW1';
+    let clientSecret = 'RJPKQG30WDTYQCVHWHA2WHE1TIUUGCTHDBV3OQHZH4JRL3LG';
+
+    let url ='https://api.foursquare.com/v2/venues/search?client_id='+clientID+
+    '&client_secret='+clientSecret+'&v=20180323&ll='+markerLat+','+markerLng+
+    '&query='+markerTitle+'&intent=match';
+
+    fetch(url)
+    .then((response) => {
+      // Code for handling API response
+      if(response.ok) {
+        return response.json();
+      }
+      throw new Error('Network response was not ok.');
+    })
+    .then((data) => {
+      console.log(data['response']['venues']);
+      const locationObject = data['response']['venues'][0];
+      if(typeof locationObject === 'undefined') {
+        this.setState({foursquareURL: ''});
+        this.setState({foursquareAddress: ''});
+        this.setState({resultsReturned: false});
+      }
+      else {
+        const id = locationObject['id'] ;
+        const foursquareURL = 'https://www.foursquare.com/v/'+id;
+        const addressArray = locationObject['location']['formattedAddress'];
+        this.setState({foursquareURL: foursquareURL});
+        this.setState({foursquareAddress: addressArray});
+        this.setState({resultsReturned: true});
+      }
+      this.addInfoWindow(marker, map, infowindow);
+      this.setState({fetchError: false});
+    })
+    .catch((error) => {
+      this.setState({error: error.toString()});
+      this.setState({fetchError: true});
+      console.log(error);
+      this.addInfoWindow(marker, map, infowindow);
+    });
   }
 
   addInfoWindow(marker, map, infowindow) {
@@ -59,6 +118,11 @@ class App extends React.Component {
         ReactDOM.render(
           <InfoWindow
             marker = {marker}
+            foursquareURL = {this.state.foursquareURL}
+            foursquareAddress = {this.state.foursquareAddress}
+            resultsReturned = {this.state.resultsReturned}
+            error = {this.state.error}
+            fetchError = {this.state.fetchError}
           />,
           document.getElementById('infowindow')
         );
@@ -96,7 +160,7 @@ class App extends React.Component {
       MARKERS.push(marker);
 
       marker.addListener('click', () => {
-        this.addInfoWindow(marker, map, infowindow)
+        this.getFoursquareData(marker, map, infowindow)
       });
 
     }
@@ -108,10 +172,10 @@ class App extends React.Component {
       <div className="container">
         <Map
           id = "map"
-          //center is Hawthorne NJ
+          //center is Metuchen NJ
           options = {{
-            center: {lat: 40.948910, lng: -74.155290},
-            zoom: 15
+            center: {lat: 40.543255, lng: -74.362952},
+            zoom: 8
           }}
           onMapLoad = {(map) => {
             this.onMapLoad(map);
