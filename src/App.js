@@ -82,7 +82,7 @@ class App extends React.Component {
       throw new Error('Network response was not ok.');
     })
     .then((data) => {
-      console.log(data['response']['venues']);
+      //console.log(data['response']['venues']);
       const locationObject = data['response']['venues'][0];
       if(typeof locationObject === 'undefined') {
         this.setState({foursquareURL: ''});

@@ -10,9 +10,10 @@
 
 .searchBox {
 	position: absolute;
-	width: 50%;
+	width: 20%;
 	height: 200px;
 	top: 50px;
 	left: 20px;
 	background-color: white;
+	overflow: scroll;
 }
