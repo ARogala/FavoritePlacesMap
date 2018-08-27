@@ -77,12 +77,18 @@ class LocationsList extends React.Component {
 				//build the dropDownUL
 				dropDownUL.push(
 					<li key={i}>
-						<h1>{allStates[i]}</h1>
-						<ul>
+						<button aria-haspopup="true">{allStates[i]}</button>
+						<ul aria-label="submenu" className="dropDown">
 							{groupedLocations[allStates[i]].map((location) => {
 								return (
-									<li key={location.id} onClick={(e) => {clickBtnFunc(location.id, e.type)}} onKeyPress={(e) => {clickBtnFunc(location.id, e.key)}}
-		 							role="button" tabIndex="0">{location.title + ' - ' + location.category}</li>
+									<li
+										key={location.id} onClick={(e) => {clickBtnFunc(location.id, e.type)}}
+										onKeyPress={(e) => {clickBtnFunc(location.id, e.key)}}
+			 							role="button"
+			 							tabIndex="0"
+		 							>
+		 								{location.title + ' - ' + location.category}
+		 							</li>
 								);
 							})}
 						</ul>
