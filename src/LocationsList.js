@@ -15,7 +15,8 @@ class LocationsList extends React.Component {
 	render() {
 		const locations = this.props.locations;
 		const clickBtnFunc = this.props.onListBtnClick;
-		let filterText = this.props.filterText;
+		let filterText = this.props.filterText.trim();
+		filterText = filterText.replace(/ /g, '');
 
 		/* Filter logic
 		escapeRegExp escapes special characters
@@ -29,7 +30,7 @@ class LocationsList extends React.Component {
 		*/
 
 		const pattern = new RegExp(escapeRegExp(filterText), 'i');
-		let filteredLocations = locations.filter((location) => pattern.test(location.title + location.category + location.state));
+		let filteredLocations = locations.filter((location) => pattern.test((location.title + location.category + location.state).replace(/ /g,'')));
 		filteredLocations.sort(sortBy('state'));
 		//console.log(filteredLocations);
 

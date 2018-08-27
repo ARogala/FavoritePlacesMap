@@ -33,7 +33,7 @@ class App extends React.Component {
 
   handleFilterTextChange(filterText) {
     this.setState({
-      filterText: filterText.trim()
+      filterText: filterText
     });
   }
   /*
