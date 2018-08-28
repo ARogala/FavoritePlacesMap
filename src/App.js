@@ -86,7 +86,7 @@ class App extends React.Component {
       const locationObject = data['response']['venues'][0];
       if(typeof locationObject === 'undefined') {
         this.setState({foursquareURL: ''});
-        this.setState({foursquareAddress: ''});
+        this.setState({foursquareAddress: []});
         this.setState({resultsReturned: false});
       }
       else {
@@ -108,12 +108,47 @@ class App extends React.Component {
     });
   }
 
+  addStreetView(marker) {
+    let errorDiv = document.getElementById('error');
+    let streetViewService = new window.google.maps.StreetViewService();
+    let radius = 50;
+    let panorama = new window.google.maps.StreetViewPanorama(document.getElementById('pano'));
+    // Use streetview service to get the closest streetview image within
+    // 50 meters of the markers position
+    streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
+    // In case the status is OK, which means the pano was found, compute the
+    // position of the streetview image, then calculate the heading, then get a
+    // panorama from that and set the options
+    function getStreetView(data, status) {
+      if(status === window.google.maps.StreetViewStatus.OK) {
+        errorDiv.innerText = '';
+        let nearStreetViewLocation = data.location.latLng;
+        let heading = window.google.maps.geometry.spherical.computeHeading(
+          nearStreetViewLocation, marker.position);
+
+        panorama.setPosition(nearStreetViewLocation);
+        panorama.setPov({
+          heading: heading,
+          pitch: 10
+        });
+
+      }
+      else {
+        errorDiv.innerText = 'Sorry no street view image for this location';
+      }
+    }
+  }
+
   addInfoWindow(marker, map, infowindow) {
     // Check to make sure the infowindow is not already opened on this marker.
     if (infowindow.marker !== marker) {
       infowindow.marker = marker;
-      infowindow.setContent('<div id="infowindow"></div>');
+      //clear previous content
+      infowindow.setContent('');
+      infowindow.setContent('<div id="infowindow"></div><div id="pano"></div>');
 
+      //domready is a google infowindow event that fires when when the div
+      //containing the InfoWindow's content is attached to the DOM
       infowindow.addListener('domready', () => {
         ReactDOM.render(
           <InfoWindow
@@ -126,6 +161,11 @@ class App extends React.Component {
           />,
           document.getElementById('infowindow')
         );
+      });
+
+      //once dom is ready and pano div is there addStreetView
+      infowindow.addListener('domready',() => {
+        this.addStreetView(marker);
       });
 
       infowindow.open(map, marker);

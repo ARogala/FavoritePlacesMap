@@ -36,7 +36,7 @@ class Map extends React.Component {
 		if(!window.google) {
 			let script = document.createElement('script');
 			script.type = 'text/javascript';
-			script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDr6Zqd5wG2EaA2PvjNryTJuze26KQi9PE&v=3';
+			script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDr6Zqd5wG2EaA2PvjNryTJuze26KQi9PE&libraries=geometry&v=3';
 			//get the first script tag in the html doc
 			let x = document.getElementsByTagName('script')[0];
 			//insert the google maps script tag as the first script in the body of the dom
