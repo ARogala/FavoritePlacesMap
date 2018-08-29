@@ -15,6 +15,7 @@ class SearchBar extends React.Component {
 		let handleFilterTextChange = this.props.onFilterTextChange;
 		return (
 			<div className="searchBarContainer">
+                <h1>My Favorite Places</h1>
 				<label htmlFor="filterLocations" className="locationsLabel">Filter Locations:</label>
             	<input
             		type="text"

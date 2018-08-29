@@ -77,7 +77,7 @@ class LocationsList extends React.Component {
 				//build the dropDownUL
 				dropDownUL.push(
 					<li key={i}>
-						<button aria-haspopup="true">{allStates[i]}</button>
+						<span>{allStates[i]}:</span>
 						<ul aria-label="submenu" className="dropDown">
 							{groupedLocations[allStates[i]].map((location) => {
 								return (
@@ -102,7 +102,7 @@ class LocationsList extends React.Component {
 		for(let i = 0; i < allStates.length; i++) {
 			if(groupedLocations[allStates[i]].length === 1) {
 				singleLocation.push(
-				<li
+				<li className="singleLocation"
 					key={groupedLocations[allStates[i]][0].id}
 					onClick={(e) => {clickBtnFunc(groupedLocations[allStates[i]][0].id, e.type)}}
 					onKeyPress={(e) => {clickBtnFunc(groupedLocations[allStates[i]][0].id, e.key)}}
@@ -118,7 +118,7 @@ class LocationsList extends React.Component {
 		return (
 			<ul className="locationsList">
 				{dropDownUL}
-				<h1>Single Location in State</h1>
+				<span>Single Locations:</span>
 				{singleLocation}
 			</ul>
 		);

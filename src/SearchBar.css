@@ -6,15 +6,17 @@
  * @version $Id$
  */
 
+.searchBarContainer h1 {
+	text-align: center;
+}
+
 
 .locationsLabel {
-	width: 100%;
-	font-size: 2rem;
+	font-size: 1.75rem;
 	font-weight: bold;
-	margin-left: 5px;
 }
 
 #filterLocations {
-	width: 80%;
+	width: 90%;
 	margin: 5px;
 }

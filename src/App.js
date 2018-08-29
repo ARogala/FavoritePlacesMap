@@ -125,7 +125,7 @@ class App extends React.Component {
         let nearStreetViewLocation = data.location.latLng;
         let heading = window.google.maps.geometry.spherical.computeHeading(
           nearStreetViewLocation, marker.position);
-
+        panorama.setOptions({addressControl: false});
         panorama.setPosition(nearStreetViewLocation);
         panorama.setPov({
           heading: heading,
@@ -142,6 +142,11 @@ class App extends React.Component {
   addInfoWindow(marker, map, infowindow) {
     // Check to make sure the infowindow is not already opened on this marker.
     if (infowindow.marker !== marker) {
+      //hide filter list when info window is rendered
+      //makes for better mobile UX
+      let searchBox = document.getElementsByClassName('searchBox');
+      searchBox[0].setAttribute('style', 'z-index: -1;');
+
       infowindow.marker = marker;
       //clear previous content
       infowindow.setContent('');
@@ -170,8 +175,10 @@ class App extends React.Component {
 
       infowindow.open(map, marker);
       // Make sure the marker property is cleared if the infowindow is closed.
+      // show filter list when info window is closed
       infowindow.addListener('closeclick', function() {
-      infowindow.marker = null;
+        searchBox[0].setAttribute('style', 'z-index: 1;');
+        infowindow.marker = null;
       });
     }
   }
