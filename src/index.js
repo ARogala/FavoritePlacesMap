@@ -20,7 +20,8 @@ const LOCATIONS = [
 	{title: 'Cape May Lighthouse', category: 'Park', state: 'New Jersey', location: {lat: 38.933195, lng: -74.960376}, id: 12},
 	{title: 'Menz Restaurant & Bar', category: 'Restaurant', state: 'New Jersey', location: {lat: 39.024300, lng: -74.896646}, id: 13},
 	{title: 'NAS Wildwood Aviation Museum', category: 'Museum', state: 'New Jersey', location: {lat: 39.005568, lng: -74.909602}, id: 14},
-	{title: 'Turtle Back Zoo', category: 'Zoo', state: 'New Jersey', location: {lat: 40.768188, lng: -74.280034}, id: 15}
+	{title: 'Turtle Back Zoo', category: 'Zoo', state: 'New Jersey', location: {lat: 40.768188, lng: -74.280034}, id: 15},
+	{title: 'Niagara SkyWheel', category: 'Attraction/Ride', state: 'Ontario', location: {lat: 43.091022, lng: -79.075480}, id: 16}
 ];
 
 ReactDOM.render(<App locations={LOCATIONS} />, document.getElementById('root'));

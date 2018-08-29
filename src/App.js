@@ -58,6 +58,8 @@ class App extends React.Component {
         }
       }
       this.getFoursquareData(marker, MAP, INFOWINDOW);
+      this.removeBounce();
+      this.addBounce(marker);
     }
   }
 
@@ -176,11 +178,24 @@ class App extends React.Component {
       infowindow.open(map, marker);
       // Make sure the marker property is cleared if the infowindow is closed.
       // show filter list when info window is closed
-      infowindow.addListener('closeclick', function() {
+      infowindow.addListener('closeclick', () => {
         searchBox[0].setAttribute('style', 'z-index: 1;');
         infowindow.marker = null;
+        this.removeBounce();
       });
     }
+  }
+
+  removeBounce() {
+    for(let i = 0; i < MARKERS.length; i++) {
+      if(MARKERS[i].getAnimation() !== null) {
+        MARKERS[i].setAnimation(null);
+      }
+    }
+  }
+
+  addBounce(marker) {
+    marker.setAnimation(window.google.maps.Animation.BOUNCE);
   }
 
   onMapLoad(map) {
@@ -207,11 +222,11 @@ class App extends React.Component {
       MARKERS.push(marker);
 
       marker.addListener('click', () => {
-        this.getFoursquareData(marker, map, infowindow)
+        this.getFoursquareData(marker, map, infowindow);
+        this.removeBounce();
+        this.addBounce(marker);
       });
-
     }
-
   }
 
   render() {
