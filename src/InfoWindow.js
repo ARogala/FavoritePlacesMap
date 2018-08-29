@@ -24,8 +24,8 @@ class InfoWindow extends React.Component {
 			return (
 				<div>
 					<div>{title}</div>
-					<div><a href={foursquareLink}>View location on Foursquare</a></div>
-					<div><a href={googleMapLink}>Search location on Google Maps</a></div>
+					<div><a href={foursquareLink} target="_blank">View location on Foursquare</a></div>
+					<div><a href={googleMapLink} target="_blank">Search location on Google Maps</a></div>
 					<div>{addressArray[0]}</div>
 					<div>{addressArray[1]}</div>
 					<div>{addressArray[2]}</div>
@@ -38,7 +38,7 @@ class InfoWindow extends React.Component {
 			return (
 				<div>
 					<div>{title}</div>
-					<div><a href={googleMapLink}>Search location on Google Maps</a></div>
+					<div><a href={googleMapLink} target="_blank">Search location on Google Maps</a></div>
 					<div>Foursquare did not return an exact match for this location.<br/>
 					Try different coordinates</div>
 					<br/>
@@ -50,7 +50,7 @@ class InfoWindow extends React.Component {
 			return (
 				<div>
 					<div>{title}</div>
-					<div><a href={googleMapLink}>Search location on Google Maps</a></div>
+					<div><a href={googleMapLink} target="_blank">Search location on Google Maps</a></div>
 					<div>Sorry the Foursquare api returned an error</div>
 					<div>{this.props.error}</div>
 					<br/>
