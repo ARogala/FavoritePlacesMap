@@ -258,10 +258,10 @@ class App extends React.Component {
       <main role="main" className="container">
         <Map
           id = "map"
-          //center is Metuchen NJ
+          //center is Allentown PA
           options = {{
-            center: {lat: 40.543255, lng: -74.362952},
-            zoom: 8
+            center: {lat: 40.602732, lng:  -75.472918},
+            zoom: 7
           }}
           onMapLoad = {(map) => {
             this.onMapLoad(map);
