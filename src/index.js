@@ -25,7 +25,7 @@ const LOCATIONS = [
 	{title: 'HersheyPark', category: 'Attraction/Ride', state: 'Pennsylvania', location: {lat: 40.288929, lng: -76.654747}, id: 17},
 	{title: 'Sea Isle Beach', category: 'Beach', state: 'New Jersey', location: {lat: 39.160047, lng: -74.685554}, id: 18},
 	{title: 'Howe Caverns', category: 'Cave', state: 'New York', location: {lat: 42.696413, lng: -74.398635}, id: 19},
-	{title: 'Six Flags Great Adventure', category: 'Attraction/Ride', state: 'New Jersey', location: {lat: 40.137108, lng: -74.440213}, id: 20}
+	{title: 'Six Flags Great Adventure', category: 'Attraction/Ride', state: 'New Jersey', location: {lat: 40.138503, lng: -74.440104}, id: 20}
 ];
 
 ReactDOM.render(<App locations={LOCATIONS} />, document.getElementById('root'));
