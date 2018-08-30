@@ -37,6 +37,7 @@ class Map extends React.Component {
 			let script = document.createElement('script');
 			script.type = 'text/javascript';
 			script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDr6Zqd5wG2EaA2PvjNryTJuze26KQi9PE&libraries=geometry&v=3';
+			script.defer = true;
 			//get the first script tag in the html doc
 			let x = document.getElementsByTagName('script')[0];
 			//insert the google maps script tag as the first script in the body of the dom
@@ -46,11 +47,22 @@ class Map extends React.Component {
 			script.addEventListener('load', e => {
 				this.onScriptLoad();
 			});
+
+			//display error message if google maps fails to load
+			script.onerror = function() {
+				let message = document.createElement('span');
+				let parent = document.getElementsByClassName('container')[0];
+				let reference = document.getElementById('map');
+				message.innerText = 'Sorry Google Maps failed to load. Try back later!';
+				message.setAttribute('style',
+				'font-size: 2.5rem; font-weight: bold; text-align: center; display: block; background: red');
+				reference.setAttribute('style', 'height: 0');
+				parent.insertBefore(message, reference);
+			}
 		}
 		else {
 			this.onScriptLoad();
 		}
-
 	}
 
 	render() {
