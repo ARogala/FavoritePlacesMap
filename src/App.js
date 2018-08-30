@@ -255,7 +255,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <main role="main" className="container">
         <Map
           id = "map"
           //center is Metuchen NJ
@@ -285,7 +285,7 @@ class App extends React.Component {
             }}
           />
         </div>
-      </div>
+      </main>
     );
   }
 }
