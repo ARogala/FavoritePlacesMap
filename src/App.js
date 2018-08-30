@@ -37,6 +37,30 @@ class App extends React.Component {
     });
   }
   /*
+    place markers to be shown in an array
+    clear all the markers
+    then show only filtered markers
+  */
+  filterMarkers(filteredLocations) {
+    //console.log(filteredLocations);
+    let showMarkers = [];
+    for(let i = 0; i < filteredLocations.length; i++) {
+      for(let j = 0; j < MARKERS.length; j++) {
+        if(MARKERS[j].id === filteredLocations[i].id) {
+          showMarkers.push(MARKERS[j]);
+        }
+      }
+    }
+    //console.log(showMarkers);
+    for(let i = 0; i < MARKERS.length; i++) {
+      MARKERS[i].setVisible(false);
+    }
+    for(let i = 0; i < showMarkers.length; i++) {
+      showMarkers[i].setVisible(true);
+    }
+  }
+
+  /*
     on button click or enter key press
     check for the right marker by comparing the id's
     of the global MARKERS and the locationID from the LocationList.
@@ -255,6 +279,9 @@ class App extends React.Component {
             filterText = {this.state.filterText}
             onListBtnClick = {(locationID, e) => {
               this.handleListBtnClick(locationID, e);
+            }}
+            filterMarkers = {(filteredLocations) => {
+              this.filterMarkers(filteredLocations);
             }}
           />
         </div>

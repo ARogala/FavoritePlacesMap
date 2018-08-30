@@ -15,6 +15,7 @@ class LocationsList extends React.Component {
 	render() {
 		const locations = this.props.locations;
 		const clickBtnFunc = this.props.onListBtnClick;
+		const filterMarkers = this.props.filterMarkers;
 		let filterText = this.props.filterText.trim();
 		filterText = filterText.replace(/ /g, '');
 
@@ -33,6 +34,7 @@ class LocationsList extends React.Component {
 		let filteredLocations = locations.filter((location) => pattern.test((location.title + location.category + location.state).replace(/ /g,'')));
 		filteredLocations.sort(sortBy('state'));
 		//console.log(filteredLocations);
+		filterMarkers(filteredLocations);
 
 		//Build the DOM with the filteredLocations
 
@@ -128,7 +130,8 @@ class LocationsList extends React.Component {
 LocationsList.propTypes = {
   locations: PropTypes.array.isRequired,
   filterText: PropTypes.string.isRequired,
-  onListBtnClick: PropTypes.func.isRequired
+  onListBtnClick: PropTypes.func.isRequired,
+  filterMarkers: PropTypes.func.isRequired
 }
 
 export default LocationsList;
