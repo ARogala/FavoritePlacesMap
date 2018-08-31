@@ -7,7 +7,7 @@
  */
 
 .locationsList {
-	height: 200px;
+	height: 85px;
 	overflow: scroll;
 	overflow-x: hidden;
 }
